@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { CreateUserRequest } from './create-user-request.dto';
+import { UserCreatedEvent } from './user-created-event';
 
 @Injectable()
 export class AppService {
