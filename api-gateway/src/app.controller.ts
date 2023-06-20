@@ -13,6 +13,8 @@ export class AppController {
 
   @Post()
   createUser(@Body() createUserRequest: CreateUserRequest) {
+    console.log(createUserRequest);
+
     return this.appService.createUser(createUserRequest);
   }
 }
