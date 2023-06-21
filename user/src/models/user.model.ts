@@ -2,7 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 
 export class User extends AggregateRoot {
   constructor(
-    private readonly firstName: string,
+    public readonly firstName: string,
     private readonly lastName: string,
   ) {
     super();

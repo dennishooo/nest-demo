@@ -25,7 +25,7 @@ export class AppService implements OnModuleInit {
 
   createUser({ firstName, lastName }: CreateUserRequest) {
     this.userClient.emit(
-      'user_created',
+      'create_user',
       new UserCreatedEvent(firstName, lastName),
     );
   }

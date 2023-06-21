@@ -5,6 +5,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { CqrsModule } from '@nestjs/cqrs';
 import { QueryHandlers } from './queries/handlers';
 import { UserRepository } from './repository/user.repository';
+import { CommandHandler } from './commands';
 
 @Module({
   imports: [
@@ -25,6 +26,6 @@ import { UserRepository } from './repository/user.repository';
     ]),
   ],
   controllers: [AppController],
-  providers: [AppService, UserRepository, ...QueryHandlers],
+  providers: [AppService, UserRepository, ...QueryHandlers, ...CommandHandler],
 })
 export class AppModule {}
