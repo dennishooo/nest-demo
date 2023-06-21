@@ -7,10 +7,14 @@ import { QueryHandlers } from './queries/handlers';
 import { UserRepository } from './repository/user.repository';
 import { CommandHandler } from './commands';
 import { EventsHandler } from './events';
+import { MongooseModule } from '@nestjs/mongoose';
+import { User, UserSchema } from './schemas/user.schema';
 
 @Module({
   imports: [
     CqrsModule,
+    MongooseModule.forRoot('mongodb://localhost/nest'),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     ClientsModule.register([
       {
         name: 'USER_SERVICE',
