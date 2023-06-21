@@ -1,6 +1,6 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { UserRepository } from 'src/repository/user.repository';
-import { User } from 'src/models/user.model';
+import { UserRepository } from '../repository/user.repository';
+import { User } from '../models/user.model';
 import { CreateUserCommand } from './impl/create-user.command';
 
 @CommandHandler(CreateUserCommand)

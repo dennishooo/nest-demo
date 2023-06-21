@@ -20,6 +20,7 @@ export class AppController {
   }
 
   @EventPattern('get_users')
+  @Get('users')
   async getUsers() {
     console.log('getting users...');
     let result = await this.queryBus.execute(new GetUsersQuery());

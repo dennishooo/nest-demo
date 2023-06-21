@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { UserGreetEvent } from 'src/events/impl/user-greet.event';
+import { UserGreetEvent } from '../events/impl/user-greet.event';
 
 export class User extends AggregateRoot {
   constructor(
