@@ -8,7 +8,7 @@ export class UserRepository {
     return user;
   }
 
-  findAll() {
+  async findAll() {
     return [user];
   }
 }

@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { CqrsModule } from '@nestjs/cqrs';
+import { QueryHandlers } from './queries/handlers';
+import { UserRepository } from './repository/user.repository';
 
 @Module({
   imports: [
@@ -23,6 +25,6 @@ import { CqrsModule } from '@nestjs/cqrs';
     ]),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UserRepository, ...QueryHandlers],
 })
 export class AppModule {}
