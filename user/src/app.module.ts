@@ -6,6 +6,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { QueryHandlers } from './queries/handlers';
 import { UserRepository } from './repository/user.repository';
 import { CommandHandler } from './commands';
+import { EventsHandler } from './events';
 
 @Module({
   imports: [
@@ -26,6 +27,12 @@ import { CommandHandler } from './commands';
     ]),
   ],
   controllers: [AppController],
-  providers: [AppService, UserRepository, ...QueryHandlers, ...CommandHandler],
+  providers: [
+    AppService,
+    UserRepository,
+    ...QueryHandlers,
+    ...CommandHandler,
+    ...EventsHandler,
+  ],
 })
 export class AppModule {}

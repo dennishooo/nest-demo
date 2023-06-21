@@ -13,8 +13,9 @@ export class UserRepository {
     return this.users;
   }
 
-  async create(firstName: string, lastName: string) {
-    this.users.push(new User(firstName, lastName));
-    return `${firstName} created from repo!`;
+  async create(firstName: string, lastName: string): Promise<User> {
+    const user = new User(firstName, lastName);
+    this.users.push(user);
+    return user;
   }
 }

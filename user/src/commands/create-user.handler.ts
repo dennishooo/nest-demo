@@ -8,13 +8,17 @@ export class CreateUserCommandHandler
   implements ICommandHandler<CreateUserCommand>
 {
   constructor(
-    private readonly userRepository: UserRepository, // private readonly publisher: EventPublisher,
+    private readonly userRepository: UserRepository,
+    private readonly publisher: EventPublisher,
   ) {}
-  async execute({ firstName, lastName }: CreateUserCommand): Promise<string> {
+  async execute({ firstName, lastName }: CreateUserCommand): Promise<User> {
     console.log('creating user in commandBus', { firstName, lastName });
-    // this.publisher.mergeObjectContext(
+    const user = this.publisher.mergeObjectContext(
+      await this.userRepository.create(firstName, lastName),
+    );
+    user.greet();
+    user.commit();
 
-    // )
-    return await this.userRepository.create(firstName, lastName);
+    return user;
   }
 }
