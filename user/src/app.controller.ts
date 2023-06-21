@@ -14,6 +14,13 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @EventPattern('get_users')
+  async getUsers() {
+    console.log('getting users...');
+
+    return await this.appService.findAll();
+  }
+
   @EventPattern('user_created')
   handleUserCreated(data: any) {
     console.log('received in controller', data);
