@@ -12,15 +12,17 @@ export class AppService implements OnModuleInit {
     return 'Hello World!';
   }
 
-  getUsers() {
-    // able to send msg, but could not receive the response
+  async getUsers() {
     console.log('getting users...');
 
-    this.userClient.send('get_users', { msg: 'hiii' }).subscribe((data) => {
-      console.log('whyyyy');
-      console.log('response from message [getUsers]', data);
-    });
-    return 'user got';
+    let result = this.userClient.send('get_users', { msg: 'haha' });
+    console.log('observable?', result);
+
+    // .subscribe((data) => {
+    //   console.log('whyyyy');
+    //   console.log('response from message [getUsers]', data);
+    // });
+    return result;
   }
 
   createUser({ firstName, lastName }: CreateUserRequest) {

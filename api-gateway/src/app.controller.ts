@@ -8,13 +8,12 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateUserRequest } from './create-user-request.dto';
-import { ClientKafka } from '@nestjs/microservices';
+import { ClientKafka, MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class AppController implements OnModuleInit {
   constructor(
-    private readonly appService: AppService,
-    @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
+    private readonly appService: AppService, // @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
   ) {}
 
   @Get()
@@ -22,9 +21,14 @@ export class AppController implements OnModuleInit {
     return this.appService.getHello();
   }
 
+  @MessagePattern('get_users')
+  handleResponse(@Payload() data: any): void {
+    console.log('Received response in Controller: ', data);
+  }
+
   @Get('users')
-  getUsers(): string {
-    return this.appService.getUsers();
+  async getUsers(): Promise<any> {
+    return await this.appService.getUsers();
   }
 
   @Post()
@@ -34,6 +38,6 @@ export class AppController implements OnModuleInit {
   }
 
   onModuleInit() {
-    this.userClient.subscribeToResponseOf('get_users');
+    //   this.userClient.subscribeToResponseOf('get_users');
   }
 }
