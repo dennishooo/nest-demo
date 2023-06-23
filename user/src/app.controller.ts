@@ -1,6 +1,10 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ClientKafka, EventPattern } from '@nestjs/microservices';
+import {
+  ClientKafka,
+  EventPattern,
+  MessagePattern,
+} from '@nestjs/microservices';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { GetUsersQuery } from './queries/impl';
 import { CreateUserCommand } from './commands/impl/create-user.command';
@@ -8,24 +12,25 @@ import { CreateUserCommand } from './commands/impl/create-user.command';
 @Controller()
 export class AppController {
   constructor(
-    @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
-    private readonly appService: AppService,
+    // @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
+    // private readonly appService: AppService,
     private readonly queryBus: QueryBus,
     private readonly commandBus: CommandBus,
   ) {}
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return 'Hello World!';
+    // return this.appService.getHello();
   }
 
-  @EventPattern('get_users')
+  @MessagePattern('get_users')
   @Get('users')
   async getUsers() {
     console.log('getting users...');
     let result = await this.queryBus.execute(new GetUsersQuery());
     console.log('result from query bus', result);
-
+    // return [];
     return result;
   }
 
